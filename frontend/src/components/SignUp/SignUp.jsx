@@ -6,7 +6,7 @@ import axios from 'axios';
 import "./signup.css"
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  setUser
+  setLoggedIn,setLoggedOut
 } from '../../redux/feature/userSlice';
 
 function SignUp() {
@@ -67,8 +67,7 @@ function SignUp() {
       setIsVisibleotp(false)
       setMinutes(1);
       setSeconds(10);
-      dispatch(setUser({_id:"jhjkh654",name:"vahid"}))
-      //  axios.post('http://localhost:5000/otp',num).then((res)=>console.log(res))      
+       axios.post('http://localhost:5000/otp',num).then((res)=>console.log(res))      
     }  
   })
   }
@@ -86,7 +85,6 @@ function SignUp() {
     } else {
       console.error("OTP verification failed");
     }
-    dispatch(setUser({_id:"jhjkh654",name:"vahid"}))
         navigate('/')
       })
       

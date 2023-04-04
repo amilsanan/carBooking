@@ -9,7 +9,7 @@ const car = mongoose.Schema({
     fuel: String,
     regNo:String,
     imagename:String,
-    isbooked:String,
+    isbooked:{type:Boolean, default:false},
     
 });
 

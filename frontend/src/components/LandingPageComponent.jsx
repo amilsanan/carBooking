@@ -1,12 +1,19 @@
-import React,{useState,useEfffect} from 'react';
+import React,{useState,useEffect} from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
+const { localStorage } = window;
+import { useSelector, useDispatch } from 'react-redux';
+import { setLoggedOut } from '../redux/feature/userSlice';
 
 
 
 function LandingPageComponent() {
 
   const navigate = useNavigate();
+  const dispatch =  useDispatch()
+
+  const user = useSelector(state => state.user)
+  console.log('log-=-=',user)
 
   let p
     const handleLogin = ()=>{
@@ -14,7 +21,11 @@ function LandingPageComponent() {
         console.log('hi');
         axios.get('http://localhost:5000/api').then((res)=>console.log(res.data))
     }
-    React.useEffect(()=>{
+    const logout = ()=>{
+      localStorage.removeItem('jwtToken');
+      dispatch(setLoggedOut()) 
+    }
+    useEffect(()=>{
         console.log('hello');
         axios.get('http://localhost:5000/admin/getCompanies')
         .then((res)=>{console.log(res)
@@ -62,7 +73,7 @@ function LandingPageComponent() {
         </div>
         <ul>
           <li>
-            <a onClick={()=>{navigate('/userbookedcars')}} className="je2-button js-menu-link _noborder" data-click-area="Just for You">
+            <a onClick={()=>{navigate('/bookedCars')}} className="je2-button js-menu-link _noborder" data-click-area="Just for You">
               <span>Booked cars</span>
             </a>
           </li>
@@ -75,10 +86,19 @@ function LandingPageComponent() {
             </a>
           </li>
           <li>
+          {
+            user?.isLoggedIn ?
+            <button type="button" onClick={logout} className="je2-user-controls__account js-account" aria-haspopup="true" aria-expanded="false">
+              <span className="je2-notification-circle js-notification-circle "/>
+              <p>Log Out</p>
+            </button>
+            :
             <button type="button" onClick={handleLogin} className="je2-user-controls__account js-account" aria-haspopup="true" aria-expanded="false">
               <span className="je2-notification-circle js-notification-circle "/>
               <p>Log In</p>
             </button>
+
+          }
           </li>
           <nav className="je2-account-dropdown js-account-dropdown _v2 _hidden _empty" style={{height: '216px'}}>
             <div className="je3-spinner">

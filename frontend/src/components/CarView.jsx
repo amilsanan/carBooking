@@ -50,6 +50,10 @@ const toggleModal = (event) => {
             carId:carDatas._id,
             image:carDatas.imagename,
           })
+          // axios.post('http://localhost:5000/changeBookingStatus',{
+          //   carId:carDatas._id,
+          // })
+
           navigate('/')
 
         // }

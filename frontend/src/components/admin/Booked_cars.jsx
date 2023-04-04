@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import Table from 'react-bootstrap/Table';
 import axios from "axios";
 import DataTable from "react-data-table-component";
 
@@ -15,6 +14,17 @@ function Booked_cars() {
     });
   }, []);
   console.log(datas);
+  const handleButtonDelete = async (id)=>{
+    console.log('button clicked',id);
+    axios.get(`http://localhost:5000/admin/deleteBookedCarsAdmin/${id}`).then((res)=>{        
+       console.log('====....',res);  
+       axios.get("http://localhost:5000/getbookedCars").then(async (res) => {
+      await SetDatas(res.data);
+      console.log("====....", datas);
+    });
+    })
+      
+  }
   const columns = [
     {
       name: "userID",
@@ -31,6 +41,12 @@ function Booked_cars() {
         <img width={50} height={50} src={row.carImage} alt="jk" />
       ),
     },
+    {
+      name:'edit',
+      cell: (row) => <button onClick={()=>handleButtonDelete(row.carId)}>delete</button>
+      
+      
+    }, 
    
   ];
 

@@ -30,7 +30,7 @@ function App() {
      <Route  exact path='/showCollections' element={ <ShowCollections/> } />
      <Route  exact path='/carView/:id' element={ <CarView/> } />
      <Route  exact path='/profile' element={ <Profile/> } />
-     <Route  exact path='/userbookedcars' element={ <UserBookedCars/> } />
+     {/* <Route  exact path='/userbookedcars' element={ <UserBookedCars/> } /> */}
      {/* <Route  exact path='/search' element={ <Header/> } /> */}
      <Route  exact path='*' element={ <Error/> } />
      <Route  exact path='/userChat' element={ <UserChat/> } />

@@ -1,11 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 function UserBookedCars() {
+  const [datas, SetDatas] = useState([]);
+  const [data, SetData] = useState([]);
+  var carDatas = []
+  let user = "63db2dc7f16acb5f9946089b"
+
+  // useEffect(() => {
+  //   axios.get(`http://localhost:5000/getbookedCarsForUsers/${user}`).then(async (res) => {
+  //     await SetDatas(res.data);
+  //     console.log("====....", res.data);
+  //    await  SetData(carDetails(res.data))
+  //    console.log('jkl',data);
+  //   });
+  // }, []);
+
+ 
+  // async function carDetails(carDetails){
+  //   console.log('adsa',carDetails);
+      
+  //     carDetails.map(async(item,index)=>{
+  //    await axios.get(`http://localhost:5000/getSingleCar/${item.carId}`).then(async (resp) => {
+  //       console.log(resp.data);
+  //       // SetData(resp.data)
+  //       carDatas.push(resp.data)
+  //     });
+  //     console.log('dae',carDatas);
+  //     //  await SetData(carDatas)
+  //   })
+  //   return carDatas
+      
+  //   }
+  
+
+  const hi = ()=>{
+    console.log(datas);
+    console.log(data);
+  }
+
     return <div>
     <div className="buyer-saved_listings index" id="view">
         <div className="je3-header js-header">
           <header>
-            <button className="je2-button js-hamburger-menu _noborder" aria-label="Menu">
+            <button onClick={hi} className="je2-button js-hamburger-menu _noborder" aria-label="Menu">
               <svg width={20} height={14} viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 13.0444H20" strokeWidth="1.6" />
                 <path d="M0 7.04443H20" strokeWidth="1.6" />
@@ -57,6 +95,7 @@ function UserBookedCars() {
             </nav>
           </aside>
         </div>
+        
         <div id="page_content" className>
           <div className="je2-buyer-dashboard">
             
@@ -72,6 +111,11 @@ function UserBookedCars() {
                   
                 </div>
               </div>
+              {data.map((item,index)=>{
+                return(
+              
+
+            
               <div className="je2-saved-listings__grid js-grid ">
                 <div className="ListingCard _initialized" data-id={12001748} data-price-usd={430200} data-country-code="IT" data-country="Italy" data-country-subdivision="Lazio" data-city="Frosinone" data-office-id={102692} data-agent-id={1039628} data-category="Car" data-brand="Porsche" data-model="SAS Speedster '57 Turbo" data-location="User account" data-position="Saved listings tab" data-type="Listing card">
                   <a href="/cars/porsche/sas-speedster-57-turbo/2019-porsche-sas-speedster-57-turbo-for-sale-12001748" title="2019 Porsche SAS Speedster '57 Turbo " target="_blank" className="js-link">
@@ -85,7 +129,7 @@ function UserBookedCars() {
                         <div className="swiper-container" style={{overflow: 'hidden'}}>
                           <div className="swiper-wrapper" style={{transition: 'transform 150ms ease 0s', width: '2200px', display: 'flex', flexDirection: 'row'}}>
                             <div className="swiper-slide-active swiper-slide" style={{backgroundImage: 'url("data:image/jpeg', width: '440px', marginRight: '0px'}}>
-                              <img decoding="sync" className="je2-lazy-load _loaded" src="https://img.jamesedition.com/listing_images/2022/05/31/13/08/47/01b5b664-7732-4e22-8442-c006443170f7/je/556x342xcxm.jpg" alt="Cabriolet in Frosinone, Lazio, Italy 1" />
+                              <img decoding="sync" className="je2-lazy-load _loaded" src='https://res.cloudinary.com/ds95de0tj/image/upload/v1677757804/sananCars/d3hs11mztkfdyt3ylnrx.webp'   alt="Cabriolet in Frosinone, Lazio, Italy 1" />
                             </div>
                            
                           </div>
@@ -110,10 +154,13 @@ function UserBookedCars() {
                     </div>
                   </a>
                 </div>
-              </div>             
+              </div>  
+               )
+               })} 
             </section>
           </div>         
         </div>
+                          
       </div>
   </div>;
 }

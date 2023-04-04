@@ -5,6 +5,10 @@ import { useForm } from "react-hook-form";
 import { GoogleLogin } from '@react-oauth/google';
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 const { localStorage } = window;
+import {
+  setLoggedIn,setLoggedOut
+} from '../../redux/feature/userSlice'
+import { useDispatch } from 'react-redux';
 
 function LogIn() {
   const { register, formState: { errors }, handleSubmit } = useForm()
@@ -14,6 +18,7 @@ function LogIn() {
   const [user, setUser] = useState([]);
   const [ profile, setProfile ] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const onClick = () => navigate('/signup')
   const onSubmit = (data) => {
@@ -23,8 +28,9 @@ function LogIn() {
       if(res.data.status=='blocked'){
         alert('user blocked')
       }else{
-        localStorage.setItem('jwtToken', res.data.token);
         if (res.data.status) {  
+          localStorage.setItem('jwtToken', res.data.token);
+          dispatch(setLoggedIn())
           navigate('/')
         } else {
           alert('wrong password')

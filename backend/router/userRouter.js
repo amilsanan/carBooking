@@ -2,8 +2,8 @@ const express = require('express');
 const { usersignUp, userlogin, auth } = require('../controller/loginController');
 const { payment } = require('../controller/paymentController');
 const { protect } = require('../middleware/authMiddleware')
-const {getSingleCar } = require('../controller/companyManagment');
-const { getUserDetails, getEditProfile,updatePassword,numberExist,addBookedCars,getbookedCars} = require('../controller/userControllder');
+const {getSingleCar,changeStatusBooking } = require('../controller/companyManagment');
+const { getUserDetails, getEditProfile,updatePassword,numberExist,addBookedCars,getbookedCars,getbookedCarsUsers} = require('../controller/userControllder');
 const { doSms,otpVerifys } = require('../verify/otp');
 const router = express.Router();
 
@@ -18,8 +18,10 @@ router.post('/otpverifys',otpVerifys)
 router.post('/login',userlogin);
 router.post('/updatePass',updatePassword);
 router.post('/numExist',numberExist);
+router.post('/changeBookingStatus',changeStatusBooking);
 router.post('/addBookedCars',addBookedCars);
 router.get('/getbookedCars',getbookedCars)
+router.get('/getbookedCarsForUsers/:id',getbookedCarsUsers)
 router.get('/getSingleCar/:id',getSingleCar)
 router.get('/login',auth)
 router.get('/getUserDetails',getUserDetails)

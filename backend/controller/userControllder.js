@@ -1,5 +1,6 @@
 const UserCredential = require("../model/userCredentialModel")
 const BookedCarCredential = require("../model/bookedCars")
+const CarCredential = require("../model/carModel")
 
 const getAllUsers = async (req, res) => {
     try {
@@ -59,6 +60,17 @@ const deleteUser = async (req, res) => {
         console.log(error.message);
     }
 }
+const deleteBookedCarsAdmin = async (req, res) => {
+    console.log("Hi", req.params.id);
+    const car = req.params.id;
+    try {
+        await BookedCarCredential.deleteOne({ carId: car }).then((response) => {
+            res.json(response)
+        })
+    } catch (error) {
+        console.log(error.message);
+    }
+}
 
 const getUserDetails = async (req, res) => {
     const userId = req.query.id;
@@ -80,6 +92,19 @@ const getbookedCars = async (req, res) => {
         console.log(error.message);
     }
 }
+const getbookedCarsUsers = async (req, res) => {
+    console.log('askjh',req.params);
+    let user= req.params.id
+    
+    try {
+        await BookedCarCredential.find({userId:user}).then((response) => {
+            console.log(response);
+            res.json(response)
+        })
+    } catch (error) {
+        console.log(error.message);
+    }
+}
 const addBookedCars = async (req, res) => {
     console.log(req.body);
     const newBooked = new BookedCarCredential({
@@ -88,6 +113,12 @@ const addBookedCars = async (req, res) => {
          carImage: req.body.image,
     })
     await newBooked.save();
+    CarCredential.updateOne({_id:req.body.carId},{
+        $set:{
+            isbooked:true
+        }
+    }).then((response) => {
+        res.json(response)})
 }
 
 const getEditProfile = async (req, res) => {
@@ -117,6 +148,6 @@ const getEditProfile = async (req, res) => {
 module.exports = {
     getAllUsers,
     deleteUser,
-    getUserDetails,
-    getEditProfile,updatePassword,numberExist,blockControl,getbookedCars,addBookedCars
+    getUserDetails,deleteBookedCarsAdmin,
+    getEditProfile,updatePassword,numberExist,blockControl,getbookedCars,addBookedCars,getbookedCarsUsers
 }

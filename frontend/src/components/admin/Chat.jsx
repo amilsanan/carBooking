@@ -3,10 +3,10 @@ import io from "socket.io-client";
 
 
 function Chat() {
-  const socket = io("http://localhost:5000"); 
-  socket.on("connect", () => {
-    console.log("Connected to server");
-  });
+  // const socket = io("http://localhost:5000"); 
+  // socket.on("connect", () => {
+  //   console.log("Connected to server");
+  // });
   socket.emit("message", "Hello, server!");
       const [message, setMessage] = useState("");
 

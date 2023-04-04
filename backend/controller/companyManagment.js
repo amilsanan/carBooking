@@ -125,6 +125,26 @@ const getCars =async (req,res)=>{
         console.log(error.message);
     }
 }
+const changeStatusBooking = (req,res)=>{
+    console.log('get--',req.body);
+    CarCredential.updateOne({_id:req.body.carId},{
+        $set:{
+            isbooked:true
+        }
+    }).then((response) => {
+        res.json(response)})
+    // CarCredential.find({_id:req.body.carId}).then((response) => {
+    //     res.json(response)})
+    // try {
+        // CarCredential.updateOne({_id:req.body.carId}, {$set: {kms: 456456} })
+        // const users =  CarCredential.updateOne({_id:req.body.carId},[{ "$set": { "isbooked": { "$eq": [false, "$isbooked"] } } }]);
+        // console.log(users);
+        
+
+    // } catch (error) {
+    //     console.log('err=',error);
+    // }
+}
 // const getAcar =async (req,res)=>{
 //     console.log('get cars',req.body);
 //     try {
@@ -181,7 +201,7 @@ const deleteCompany =async (req,res)=>{
 
 module.exports = {
     addCompanies,
-    getCompanies,
+    getCompanies,changeStatusBooking,
     addCars,getCars,deleteCars,deleteCompany,getSingleCar,updateCars,
 }
 
